@@ -1,5 +1,5 @@
-import { createContext, ReactNode, useEffect, useState } from "react";
-import { filterTransactionsList } from "../services/transactions";
+import { createContext, ReactNode, useEffect, useState } from 'react'
+import { filterTransactionsList } from '../services/transactions'
 
 interface Transaction {
   id: string
@@ -39,7 +39,9 @@ export function TransactionsProvider({ children }: TransactionsProviderProps) {
   }, [])
 
   return (
-    <TransactionsContext.Provider value={{ transactions, fetchTransactions, updateTransactions}}>
+    <TransactionsContext.Provider
+      value={{ transactions, fetchTransactions, updateTransactions }}
+    >
       {children}
     </TransactionsContext.Provider>
   )

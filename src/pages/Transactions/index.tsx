@@ -1,10 +1,13 @@
-import { useContext, useEffect, useState } from "react";
-import { Header } from "../../components/Header";
-import { Summary } from "../../components/Summary";
-import { useTransactions } from "../../hooks/useTransactions";
-import { dataFormatter, priceFormatter } from "../../utils/formatter";
-import { SearchForm } from "./components/SearchForm";
-import { PriceHighlight, TransactionsContainer, TransactionsTable } from "./styles";
+import { Header } from '../../components/Header'
+import { Summary } from '../../components/Summary'
+import { useTransactions } from '../../hooks/useTransactions'
+import { dataFormatter, priceFormatter } from '../../utils/formatter'
+import { SearchForm } from './components/SearchForm'
+import {
+  PriceHighlight,
+  TransactionsContainer,
+  TransactionsTable,
+} from './styles'
 
 export function Transactions() {
   const { transactions } = useTransactions()
@@ -12,7 +15,7 @@ export function Transactions() {
   const transactionsFormatted = transactions.map((transaction) => ({
     ...transaction,
     createdAt: dataFormatter.format(new Date(transaction.createdAt)),
-    price: priceFormatter.format(transaction.price)
+    price: priceFormatter.format(transaction.price),
   }))
 
   return (

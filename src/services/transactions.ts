@@ -1,4 +1,4 @@
-import { api } from "../lib/axios";
+import { api } from '../lib/axios'
 
 interface Transaction {
   description: string
@@ -12,20 +12,20 @@ export async function filterTransactionsList(query?: string) {
     params: {
       _sort: 'createdAt',
       _order: 'desc',
-      q: query
-    }
+      q: query,
+    },
   })
   return response
 }
 
 export async function createNewTransaction(data: Transaction) {
-  const { description, price, category, type } = data 
+  const { description, price, category, type } = data
   const transaction = await api.post('transactions', {
-    description, 
-    price, 
-    category, 
+    description,
+    price,
+    category,
     type,
-    createdAt: new Date()
+    createdAt: new Date(),
   })
   return transaction.data
 }

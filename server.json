@@ -23,6 +23,22 @@
       "category": "Casa",
       "price": 500,
       "createdAt": "2022-01-14T09:50:20.977Z"
+    },
+    {
+      "description": "Celular",
+      "price": 4000,
+      "category": "Luxo",
+      "type": "outcome",
+      "createdAt": "2023-01-16T10:40:19.445Z",
+      "id": 4
+    },
+    {
+      "description": "Comida",
+      "price": 12,
+      "category": "Alimentação",
+      "type": "outcome",
+      "createdAt": "2023-01-16T10:55:51.339Z",
+      "id": 5
     }
   ]
 }

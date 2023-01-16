@@ -1,4 +1,4 @@
-import BounceLoader from "react-spinners/BounceLoader";
+import BounceLoader from 'react-spinners/BounceLoader'
 
 interface LoadingProps {
   color?: string
