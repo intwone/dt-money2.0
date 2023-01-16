@@ -3,16 +3,18 @@ import { useForm } from "react-hook-form";
 import { schema, SearchFormInputs } from "./schema";
 import { SearchFormContainer } from "./styles";
 import { zodResolver } from '@hookform/resolvers/zod'
-import BounceLoader from "react-spinners/BounceLoader";
+import { Loading } from "../../../../components/Loading";
+import { useTransactions } from "../../../../hooks/useTransactions";
 
 export function SearchForm() {
+  const { fetchTransactions } = useTransactions()
+
   const { register, handleSubmit, formState } = useForm<SearchFormInputs>({
     resolver: zodResolver(schema)
   })
 
   async function handleSearchTransactions(data: SearchFormInputs) {
-    await new Promise(resolve => setTimeout(resolve, 2000))
-    console.log(data)
+    await fetchTransactions(data.query)
   }
 
   return (
@@ -25,9 +27,15 @@ export function SearchForm() {
 
       <button type="submit" disabled={formState.isSubmitting}>
         { formState.isSubmitting ? (
-          <BounceLoader size={20} color="#00875F"/>
+          <>
+            <Loading size={20} />
+            Buscar
+          </>
         ) : (
-          <MagnifyingGlass size={20} />
+          <>
+            <MagnifyingGlass size={20} />
+            Buscar
+          </>
         )}
       </button>
     </SearchFormContainer>

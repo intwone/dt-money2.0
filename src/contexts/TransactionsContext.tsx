@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
+import { filterTransactionsList } from "../services/transactions";
 
 interface Transaction {
   id: string
@@ -11,6 +12,8 @@ interface Transaction {
 
 export interface TransactionsContextType {
   transactions: Transaction[]
+  fetchTransactions: (query?: string) => Promise<void>
+  updateTransactions: (transaction: Transaction) => void
 }
 
 interface TransactionsProviderProps {
@@ -22,18 +25,21 @@ export const TransactionsContext = createContext({} as TransactionsContextType)
 export function TransactionsProvider({ children }: TransactionsProviderProps) {
   const [transactions, setTransactions] = useState<Transaction[]>([])
 
-  async function loadTransactions() {
-    const response = await fetch('http://localhost:3000/transactions')
-    const data = await response.json()
-    setTransactions(data)
+  async function fetchTransactions(query?: string) {
+    const response = await filterTransactionsList(query)
+    setTransactions(response.data)
+  }
+
+  function updateTransactions(transaction: Transaction) {
+    setTransactions((state) => [...state, transaction])
   }
 
   useEffect(() => {
-    loadTransactions()
+    fetchTransactions()
   }, [])
 
   return (
-    <TransactionsContext.Provider value={{ transactions }}>
+    <TransactionsContext.Provider value={{ transactions, fetchTransactions, updateTransactions}}>
       {children}
     </TransactionsContext.Provider>
   )
